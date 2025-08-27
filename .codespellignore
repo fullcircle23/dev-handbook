@@ -1,0 +1,7 @@
+# Ignore technical terms
+kubectl
+lychee
+yaml
+markdownlint
+devops
+arc

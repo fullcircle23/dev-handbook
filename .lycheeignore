@@ -1,0 +1,7 @@
+# Ignore mail/phone links
+^mailto:
+^tel:
+
+# Ignore placeholder/example domains
+example.com
+localhost
