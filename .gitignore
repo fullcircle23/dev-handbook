@@ -1,3 +1,11 @@
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+# (Optional) VS Code project files
+.vscode/
+
 # ==========================
 # Python
 # ==========================
@@ -51,3 +59,4 @@ logs/
 .env
 .env.local
 .env.*.local
+
