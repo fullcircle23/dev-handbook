@@ -18,6 +18,7 @@ dist/
 .installed.cfg
 *.manifest
 *.spec
+.python-version
 
 # Virtual environments
 .venv/
