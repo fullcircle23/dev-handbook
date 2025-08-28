@@ -1,7 +1,7 @@
 # Dev Handbook 📚
 
-A curated collection of software development knowledge, notes, and cheatsheets.  
-Maintained by **ARC Consultancy & Training**.
+A curated collection of software development knowledge, notes, and cheatsheets. Maintained by **ARC
+Consultancy & Training**.
 
 ## 📂 Topics
 

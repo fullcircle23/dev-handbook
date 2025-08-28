@@ -21,9 +21,9 @@ For details, see the full contributing guidelines below 👇
 
 ## Contributing Guidelines
 
-Thank you for considering contributing to **dev-handbook** 🙌  
-This repository is intended as a practical knowledge base for developers.  
-To keep it useful and consistent, please follow the guidelines below.
+Thank you for considering contributing to **dev-handbook** 🙌 This repository is intended as a
+practical knowledge base for developers. To keep it useful and consistent, please follow the
+guidelines below.
 
 ---
 
