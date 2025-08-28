@@ -2,14 +2,15 @@
 
 ---
 
-# 📄 Page 1 – Core Git Commands
+## 📄 Page 1 – Core Git Commands
 
 ## 🔹 Setup
+
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "you@email.com"
 git config --list
-````
+```
 
 ## 🔹 Start a Project
 
@@ -57,12 +58,11 @@ git reset --hard               # Reset to last commit
 git revert <commit>            # Undo by new commit
 ```
 
-✅ **Remember:** Most of your daily flow =
-`status → add → commit → pull → push`
+✅ **Remember:** Most of your daily flow = `status → add → commit → pull → push`
 
 ---
 
-# 📄 Page 2 – Advanced Git Commands (with diagrams)
+## 📄 Page 2 – Advanced Git Commands (with diagrams)
 
 ## 🔹 Fix & Recovery
 
@@ -97,7 +97,7 @@ Good: A---B---C   Bad: F
               D---E---F
 ```
 
-👉 Git auto-checks commits between *good* and *bad* to find the culprit.
+👉 Git auto-checks commits between _good_ and _bad_ to find the culprit.
 
 ---
 
@@ -199,8 +199,7 @@ git archive --format=zip HEAD > repo.zip
 
 ---
 
-💡 **Pro tip:**
-Pretty log for scripts or reviews:
+💡 **Pro tip:** Pretty log for scripts or reviews:
 
 ```bash
 git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
