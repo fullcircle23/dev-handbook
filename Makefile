@@ -1,4 +1,4 @@
-.PHONY: lint-md check-links ci test test-python test-node
+.PHONY: lint-md check-links ci test install-python test-python test-node
 
 lint-md:
 	prettier "**/*.md" --write
@@ -16,11 +16,11 @@ spellcheck:
 
 test: test-python test-node
 
+install-python:
+	cd programming/python && python -m pip install -e ".[test]"
+
 test-python:
-	cd programming/python && \
-	python -m pip install -e ".[test]" --quiet && \
-	python -c "import dev_handbook_python as m; print('OK:', m.__file__)" && \
-	python -m pytest -q
+	cd programming/python && python -m pytest -q
 
 test-node:
 	cd programming/javascript && npm ci || npm i && npx vitest run || true
