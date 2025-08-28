@@ -1,0 +1,64 @@
+# .pre-commit-config.yaml
+default_language_version:
+  python: python3.11 # stable for hooks even if you use 3.13 for runtime
+
+ci:
+  # Push formatter/linter fixes back to PR branches
+  autofix_prs: true
+  autofix_commit_msg: "[pre-commit.ci] auto fixes"
+
+  # Keep hooks fresh via scheduled PRs
+  autoupdate_schedule: weekly # weekly | monthly | quarterly
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
+
+  # Optionally skip specific hooks on CI (leave empty for now)
+  skip: []
+
+  # (Optional) if you want a dedicated branch name for the autoupdate PRs:
+  # autoupdate_branch: "pre-commit-autoupdate"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: mixed-line-ending
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: check-merge-conflict
+
+  # Python format/lint (only under programming/python/)
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        files: ^programming/python/
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.2
+    hooks:
+      - id: ruff
+        args: [--fix]
+        files: ^programming/python/
+
+  # Markdown lint (honors your .markdownlint.json)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.42.0
+    hooks:
+      - id: markdownlint
+        args: [--config, .markdownlint.json, --ignore, node_modules]
+        additional_dependencies: [] # uses packaged binary
+
+  # Optional: Prettier for JS/TS/MD (Node must be available)
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.6.2
+    hooks:
+      - id: prettier
+        types_or: [markdown, json, yaml]
+
+exclude: >
+  (^node_modules/|^programming/node/node_modules/|^dist/|^build/|
+   ^\.venv/|^ENV/|^\.pytest_cache/|^.*\.egg-info/|^\.idea/|^\.DS_Store$)
