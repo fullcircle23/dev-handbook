@@ -1,4 +1,4 @@
-.PHONY: lint-md check-links ci
+.PHONY: lint-md check-links ci test test-python test-node
 
 lint-md:
 	prettier "**/*.md" --write
@@ -13,3 +13,14 @@ ci: lint-md check-links
 
 spellcheck:
 	codespell --ignore-words .codespellignore --skip="./.git,./node_modules" || true
+
+test: test-python test-node
+
+test-python:
+	cd programming/python && \
+	python -m pip install -e ".[test]" --quiet && \
+	python -c "import dev_handbook_python as m; print('OK:', m.__file__)" && \
+	python -m pytest -q
+
+test-node:
+	cd programming/javascript && npm ci || npm i && npx vitest run || true
