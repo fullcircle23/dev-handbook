@@ -1,4 +1,5 @@
 # .pre-commit-config.yaml
+minimum_pre_commit_version: "3.5.0"
 default_language_version:
   python: python3.11 # stable for hooks even if you use 3.13 for runtime
 
@@ -19,8 +20,10 @@ ci:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=2048"] # 2 MB
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: check-yaml
@@ -33,24 +36,26 @@ repos:
 
   # Python format/lint (only under programming/python/)
   - repo: https://github.com/psf/black
-    rev: 24.8.0
+    rev: 25.1.0
     hooks:
       - id: black
         files: ^programming/python/
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.2
+    rev: v0.12.11
     hooks:
-      - id: ruff
+      - id: ruff-check
         args: [--fix]
+        files: ^programming/python/
+      - id: ruff-format
         files: ^programming/python/
 
   # Markdown lint (honors your .markdownlint.json)
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.42.0
+    rev: v0.45.0
     hooks:
       - id: markdownlint
-        args: [--config, .markdownlint.json, --ignore, node_modules]
-        additional_dependencies: [] # uses packaged binary
+        args: [--fix, --config, .markdownlint.json]
 
   # Optional: Prettier for JS/TS/MD (Node must be available)
   - repo: https://github.com/rbubley/mirrors-prettier
@@ -58,7 +63,17 @@ repos:
     hooks:
       - id: prettier
         types_or: [markdown, json, yaml]
+        # files: ^(docs/|handbook/|README\.md|.*\.(md|mdx|json|ya?ml))$
 
 exclude: >
-  (^node_modules/|^programming/node/node_modules/|^dist/|^build/|
-   ^\.venv/|^ENV/|^\.pytest_cache/|^.*\.egg-info/|^\.idea/|^\.DS_Store$)
+  (?x)^(
+    (?:|.*/)node_modules/|
+    (?:|.*/)dist/|
+    (?:|.*/)build/|
+    (?:|.*/)\.venv/|
+    (?:|.*/)ENV/|
+    (?:|.*/)\.pytest_cache/|
+    (?:|.*/).*\.egg-info/|
+    (?:|.*/)\.idea/|
+    (?:|.*/)\.DS_Store
+  )$
